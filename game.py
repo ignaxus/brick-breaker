@@ -5,6 +5,7 @@ import sys
 #import other classes
 from ball import Ball
 from paddle import Paddle
+from brick import Brick
 
 #class for the game
 class Game:
@@ -26,6 +27,20 @@ class Game:
         self.ball = Ball(self)
         self.paddle = Paddle(self)
 
+        #add bricks
+        self.arrange_bricks()
+
+    #arrange bricks on the screen
+    def arrange_bricks(self):
+        self.bricks = []
+
+        for row in range(10):
+            for col in range(26):
+                x = 38 + col * 28
+                y = 50 + row * 28
+                brick = Brick(self, x, y)
+                self.bricks.append(brick)
+    
     #enable user to quit   
     def check_event(self):
         for event in pygame.event.get():
@@ -35,13 +50,17 @@ class Game:
     #update the position of all elements
     def update_position(self):
         self.paddle.move()
-        self.ball.move(self.paddle)
-    
+        self.ball.move(self.paddle, self.bricks)
+        
     #update all element in the screen
     def update_screen(self):
         self.screen.fill(self.WHITE)
         self.ball.draw()
         self.paddle.draw()
+
+        for brick in self.bricks:
+            brick.draw()
+
         pygame.display.update()
         self.clock.tick(60)
     
