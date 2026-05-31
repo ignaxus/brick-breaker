@@ -14,7 +14,7 @@ class Paddle:
         self.y = 570
 
         #set speed
-        self.speed = 8
+        self.speed = 10
 
     #control the movement of paddle when keys are pressed
     def move(self):
@@ -25,6 +25,13 @@ class Paddle:
 
         if keys[pygame.K_RIGHT]:
             self.x += self.speed
+
+        #prevent paddle moving out of the window
+        if self.x < 0:
+            self.x = 0
+
+        if self.x + self.width > 800:
+            self.x = 800 - self.width
 
     def draw(self):
         pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.width, self.height))
