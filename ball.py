@@ -8,7 +8,7 @@ class Ball:
 
         #initial position, random position under bricks
         self.x = random.randint(100, 700)
-        self.y = random.randint(350, 450)   
+        self.y = random.randint(390, 490)   
         
         #set radius and color
         self.radius = 15
@@ -19,12 +19,12 @@ class Ball:
         self.speed_y = -4
 
     #movement of the ball, including collisions
-    def move(self, paddle, bricks):
+    def move(self, game, paddle, bricks):
         self.x += self.speed_x
         self.y += self.speed_y
 
         self.wall_collision()
-        self.paddle_collision(paddle)
+        self.paddle_collision(game, paddle)
         self.brick_collision(bricks)
 
     def wall_collision(self):
@@ -37,10 +37,10 @@ class Ball:
             self.speed_x *= -1
 
         # top wall
-        if self.y - self.radius <= 0:
+        if self.y - self.radius <= 40:
             self.speed_y *= -1
 
-    def paddle_collision(self, paddle):
+    def paddle_collision(self, game, paddle):
         #check collision
         if (
             self.y + self.radius >= paddle.y
@@ -69,7 +69,9 @@ class Ball:
             #prevent ball going into the paddle
             self.y = paddle.y - self.radius
 
-  
+            #when collide, add one score
+            game.score += 1
+
     def brick_collision(self, bricks):
         for brick in bricks[:]:
             #check collision

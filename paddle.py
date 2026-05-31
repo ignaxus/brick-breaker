@@ -11,7 +11,7 @@ class Paddle:
 
         #original position
         self.x = 360
-        self.y = 570
+        self.y = 610
 
         #set speed
         self.speed = 10
