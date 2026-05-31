@@ -48,7 +48,7 @@ class Game:
                 x = 38 + col * 28
                 y = 90 + row * 28
                 brick = Brick(self, x, y)
-                #elf.bricks.append(brick)
+                self.bricks.append(brick)
     
     #enable user to quit   
     def check_event(self):
