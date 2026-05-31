@@ -1,7 +1,4 @@
 # Brick Breaker
-A classic Brick Breaker game built with Pygame.
-
-# Brick Breaker
 
 A simple Brick Breaker game developed with Python and Pygame.
 
