@@ -9,6 +9,7 @@ Licensed under the Apache License, Version 2.0
 #import modules
 import pygame
 import sys
+import os
 
 #import other classes
 from ball import Ball
@@ -22,7 +23,7 @@ class Game:
         pygame.init()
 
         #set icon
-        icon = pygame.image.load("icon.png")
+        icon = pygame.image.load(self.resource_path("icon.png"))
         pygame.display.set_icon(icon)
 
         self.width = 800
@@ -50,6 +51,15 @@ class Game:
         self.score = 0
         self.game_over = False
         self.victory = False
+
+    #enable exe packages to find icon path
+    def resource_path(self, relative_path):
+        try:
+            base_path = sys._MEIPASS
+        except Exception:
+            base_path = os.path.abspath(".")
+
+        return os.path.join(base_path, relative_path)
 
     #arrange bricks on the screen
     def arrange_bricks(self):
